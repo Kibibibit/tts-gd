@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 		var frame_index = int(frame_position) % lpc.get_frame_count()
 		var next_frame_index = (frame_index + 1) % lpc.get_frame_count()
 		var frame_alpha = fmod(frame_position, 1.0)
-		var e := wave.bisqwit(phase, player.stream.mix_rate, 120.0, 0.1, 0.9)
+		var e := wave.bisqwit(phase, player.stream.mix_rate, 200.0, 0.1, 0.9)
 		phase = wrapi(phase+1, 0, lpc.get_frame_count())
 
 		var sample = synth.process_sample_interpolated(e, frame_index, next_frame_index, frame_alpha)
