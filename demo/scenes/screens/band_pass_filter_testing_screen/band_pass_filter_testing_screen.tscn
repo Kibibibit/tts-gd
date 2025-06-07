@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://dl6wtcgstd2dx"]
+
+[ext_resource type="Script" uid="uid://bfqvo60072ku3" path="res://scenes/screens/band_pass_filter_testing_screen/band_pass_filter_testing_screen.gd" id="1_a42tr"]
+[ext_resource type="PackedScene" uid="uid://dqwoaq24wd1nl" path="res://scenes/ui_prefabs/back_button/back_button.tscn" id="2_063ao"]
+[ext_resource type="PackedScene" uid="uid://t2j8jfnhig4q" path="res://scenes/ui_prefabs/visualiser/visualiser.tscn" id="2_uyg3f"]
+[ext_resource type="PackedScene" uid="uid://dlv6snrh7s31t" path="res://scenes/ui_prefabs/filter_controls/filter_controls.tscn" id="4_oacdr"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_063ao"]
+mix_rate = 11050.0
+buffer_length = 0.1
+
+[node name="BandPassFilterTestingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a42tr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" parent="VBoxContainer/Control" instance=ExtResource("2_063ao")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="StartButton" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start"
+
+[node name="StopButton" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Stop
+"
+
+[node name="NoiseDropdown" type="OptionButton" parent="VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Pink Noise"
+popup/item_0/id = 0
+popup/item_1/text = "White Noise"
+popup/item_1/id = 1
+popup/item_2/text = "Saw Wave"
+popup/item_2/id = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Visualiser" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_uyg3f")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="FilterControlsA" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_oacdr")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FilterControlsB" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_oacdr")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_063ao")

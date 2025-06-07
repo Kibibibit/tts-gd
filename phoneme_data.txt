@@ -1,0 +1,59 @@
+Australian English Phoneme Inventory
+VOWELS
+Phoneme	IPA	Example Words	Type	ADSR Pattern
+AA	ɐ	cut, but	Short Vowel	Moderate attack, long sustain, short decay
+A	ɐː	cart, far	Long Vowel	Slow attack, very long sustain, moderate decay
+AE	æ	bat, cat	Short Vowel	Quick attack, medium sustain, quick decay
+AH	ʌ	cup, luck	Short Vowel	Medium attack, short sustain, medium decay
+AW	ɔ	pot, cot	Short Vowel	Moderate attack, medium sustain, medium decay
+AO	ɔː	caught, law	Long Vowel	Slow attack, long sustain, slow decay
+UH	ʊ	book, look	Short Vowel	Quick attack, short sustain, medium decay
+UW	uː	boot, food	Long Vowel	Medium attack, long sustain, slow decay
+IH	ɪ	bit, sit	Short Vowel	Quick attack, short sustain, quick decay
+IY	iː	beat, meat	Long Vowel	Medium attack, long sustain, slow decay
+EH	e	bet, net	Short Vowel	Quick attack, medium sustain, medium decay
+ER	ɜː	bird, turn	Long Vowel	Medium attack, long sustain, medium decay
+AX	ə	about, common	Reduced Vowel	Very quick attack, short sustain, quick decay
+DIPHTHONGS
+Phoneme	IPA	Example Words	Type	ADSR Pattern
+EY	eɪ	bay, day	Diphthong	Medium attack, long sustain with F1/F2 transition, medium decay
+AY	aɪ	buy, try	Diphthong	Medium attack, long sustain with F1/F2 transition, medium decay
+OY	ɔɪ	boy, toy	Diphthong	Medium attack, long sustain with F1/F2 transition, medium decay
+AW	aʊ	how, now	Diphthong	Medium attack, long sustain with F1/F2 transition, medium decay
+OW	əʊ	go, show	Diphthong	Medium attack, long sustain with F1/F2 transition, medium decay
+IA	ɪə	ear, here	Diphthong	Quick attack, medium sustain with F1/F2 transition, medium decay
+EA	eə	air, where	Diphthong	Medium attack, medium sustain with F1/F2 transition, medium decay
+UA	ʊə	tour, pure	Diphthong	Medium attack, medium sustain with F1/F2 transition, medium decay
+STOPS/PLOSIVES
+Phoneme	IPA	Example Words	Type	ADSR Pattern
+P	p	pat, tap	Voiceless Stop	Silence, explosive attack, very short decay
+B	b	bat, tab	Voiced Stop	Very short attack, short voiced component, short decay
+T	t	top, pot	Voiceless Stop	Silence, explosive attack, very short decay with aspiration
+D	d	dog, had	Voiced Stop	Very short attack, short voiced component, short decay
+K	k	cat, tick	Voiceless Stop	Silence, explosive attack, very short decay with aspiration
+G	g	got, bag	Voiced Stop	Very short attack, short voiced component, short decay
+FRICATIVES
+Phoneme	IPA	Example Words	Type	ADSR Pattern
+F	f	fat, life	Voiceless Fricative	Quick attack, sustained noise, medium decay
+V	v	vat, live	Voiced Fricative	Quick attack, sustained noise+voice, medium decay
+TH	θ	thin, path	Voiceless Fricative	Gradual attack, sustained noise, medium decay
+DH	ð	this, breathe	Voiced Fricative	Gradual attack, sustained noise+voice, medium decay
+S	s	sit, pass	Voiceless Fricative	Quick attack, sustained high-freq noise, medium decay
+Z	z	zip, rose	Voiced Fricative	Quick attack, sustained high-freq noise+voice, medium decay
+SH	ʃ	ship, wish	Voiceless Fricative	Medium attack, sustained noise, medium decay
+ZH	ʒ	measure, vision	Voiced Fricative	Medium attack, sustained noise+voice, medium decay
+H	h	hat, ahead	Voiceless Glottal	Soft attack, brief aspiration noise, soft decay
+NASALS
+Phoneme	IPA	Example Words	Type	ADSR Pattern
+M	m	mat, ram	Nasal	Medium attack, sustained resonance, medium decay
+N	n	not, ran	Nasal	Medium attack, sustained resonance, medium decay
+NG	ŋ	sing, ring	Nasal	Medium attack, sustained resonance, medium decay
+APPROXIMANTS
+Phoneme	IPA	Example Words	Type	ADSR Pattern
+L	l	let, feel	Lateral	Medium attack, sustained resonance, medium decay
+R	ɹ	red, very	Retroflex	Medium attack, sustained resonance, medium decay
+W	w	wet, away	Semivowel	Gradual attack, brief transition, gradual decay
+Y	j	yet, beyond	Semivowel	Gradual attack, brief transition, gradual decay
+AUSTRALIAN ENGLISH SPECIFIC
+Phoneme	IPA	Example Words	Type	ADSR Pattern
+DX	ɾ	butter, water	Flap	Very quick attack, very short sustain, quick decay

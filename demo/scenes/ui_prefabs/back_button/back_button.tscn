@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqwoaq24wd1nl"]
+
+[ext_resource type="Script" uid="uid://dkojalqltyelj" path="res://scenes/ui_prefabs/back_button/back_button.gd" id="1_k805b"]
+
+[node name="BackButton" type="Button"]
+text = "Back"
+script = ExtResource("1_k805b")

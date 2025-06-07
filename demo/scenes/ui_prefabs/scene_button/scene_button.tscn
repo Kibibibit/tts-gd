@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c80f24rho28j8"]
+
+[ext_resource type="Script" uid="uid://lojnigdguy5f" path="res://scenes/ui_prefabs/scene_button/scene_button.gd" id="1_lskl7"]
+
+[node name="SceneButton" type="Button"]
+script = ExtResource("1_lskl7")
