@@ -33,6 +33,7 @@ namespace godot {
             double next_white_noise();
             double next_pink_noise();
             double voiced_wave(double phase, double shape);
+            double bisqwit(int step, double rate, double pitch, double breath, double buzz);
 
             void set_seed(uint32_t seed);
 

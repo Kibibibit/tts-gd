@@ -7,7 +7,6 @@ var initial_scene: PackedScene
 var current_scene: Node
 
 func _ready() -> void:
-	
 	_set_scene(initial_scene)
 	SignalBus.change_scene.connect(_set_scene)
 	SignalBus.return_to_main.connect(_set_scene.bind(initial_scene))

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://diuk4qhxola5m"]
+
+[ext_resource type="Script" uid="uid://3vgxoe2px7m5" path="res://scenes/screens/lpc_player_screen/lpc_player_screen.gd" id="1_b3bge"]
+[ext_resource type="LPCFile" uid="uid://cgw7reev64kd6" path="res://resources/dan_11025_11025.LPCB" id="2_vji6u"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_vji6u"]
+mix_rate = 11050.0
+
+[node name="LpcPlayerScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b3bge")
+lpc = ExtResource("2_vji6u")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_vji6u")

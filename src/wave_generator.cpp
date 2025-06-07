@@ -37,7 +37,7 @@ void WaveGenerator::reset() {
         bN[i] = 0.0;
     }
     this->generator = std::mt19937(std::random_device{}());
-    this->distribution = std::uniform_real_distribution<double>(-1.0, 1.0);
+    this->distribution = std::uniform_real_distribution<double>(0.0, 1.0);
 
 }
 
@@ -54,6 +54,13 @@ double WaveGenerator::voiced_wave(double phase, double shape) {
         double t_prime = (t - shape) / (1.0 - shape);
         return 1.0 - t_prime * t_prime;
     }
+}
+
+double WaveGenerator::bisqwit(int step, double rate, double pitch, double breath, double buzz) {
+    double p = pitch; // TODO: Potentially apply hysteresis to pitch
+
+    double w = (step %= unsigned(rate/p)) / double(rate/p);
+    return  (-0.5 + next_pink_noise())*breath + (std::exp2(w)-1.0/(1.0+w))*buzz;
 }
 
 double WaveGenerator::next_white_noise() {
@@ -91,6 +98,7 @@ void WaveGenerator::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_seed", "seed"), &WaveGenerator::set_seed);
     ClassDB::bind_method(D_METHOD("set_stages", "octaves"), &WaveGenerator::set_stages);
     ClassDB::bind_method(D_METHOD("get_stages"), &WaveGenerator::get_stages);
+    ClassDB::bind_method(D_METHOD("bisqwit", "step", "rate", "pitch", "breath", "buzz"), &WaveGenerator::bisqwit);
 
     ADD_PROPERTY(PropertyInfo(Variant::INT, "stages", PROPERTY_HINT_RANGE, "1,6,1"), "set_stages", "get_stages");
 }

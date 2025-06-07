@@ -4,8 +4,12 @@
 #include "lpc_file.h"
 #include <godot_cpp/classes/resource.hpp>
 #include <godot_cpp/variant/typed_dictionary.hpp>
+#include <godot_cpp/variant/variant.hpp>
+#include "phone.h"
 
 namespace godot {
+
+
 class VoiceResource : public Resource {
 	GDCLASS(VoiceResource, Resource);
 
@@ -13,7 +17,7 @@ class VoiceResource : public Resource {
 		String voice_name;
 		String voice_language;
 		Ref<LPCFile> lpc_file;
-		TypedDictionary<String, int> phoneme_map;
+		TypedDictionary<String, Phone> phone_map;
 
 	protected:
 		static void _bind_methods();
@@ -31,8 +35,8 @@ class VoiceResource : public Resource {
 		void set_lpc_file(const Ref<LPCFile> &file);
 		Ref<LPCFile> get_lpc_file() const;
 
-		void set_phoneme_map(const Dictionary &map);
-		Dictionary get_phoneme_map() const;
+		void set_phones_map(const TypedDictionary<String, Phone> &phones);
+		TypedDictionary<String, Phone> get_phones_map() const;
 
 
 	};

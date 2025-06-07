@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn0axxxyi4cji"]
+[gd_scene load_steps=4 format=3 uid="uid://cn0axxxyi4cji"]
 
 [ext_resource type="PackedScene" uid="uid://c80f24rho28j8" path="res://scenes/ui_prefabs/scene_button/scene_button.tscn" id="1_5uhmd"]
 [ext_resource type="PackedScene" uid="uid://dvo73u4yjkr4v" path="res://scenes/screens/visualiser_testing_screen/visualiser_testing_screen.tscn" id="2_ym56n"]
-[ext_resource type="PackedScene" uid="uid://dl6wtcgstd2dx" path="res://scenes/screens/band_pass_filter_testing_screen/band_pass_filter_testing_screen.tscn" id="3_6uial"]
-[ext_resource type="PackedScene" uid="uid://cngbh7bkxbfe7" path="res://scenes/control.tscn" id="4_7uyh7"]
+[ext_resource type="PackedScene" uid="uid://diuk4qhxola5m" path="res://scenes/screens/lpc_player_screen/lpc_player_screen.tscn" id="3_6uial"]
 
 [node name="MainScreen" type="Control"]
 layout_mode = 3
@@ -29,12 +28,7 @@ layout_mode = 2
 text = "Visualiser Testing"
 scene = ExtResource("2_ym56n")
 
-[node name="BandPassFilterTestingButton" parent="CenterContainer/GridContainer" instance=ExtResource("1_5uhmd")]
+[node name="LPCPlayerButton" parent="CenterContainer/GridContainer" instance=ExtResource("1_5uhmd")]
 layout_mode = 2
-text = "Band Pass Filter Testing"
+text = "LPC Player"
 scene = ExtResource("3_6uial")
-
-[node name="SpeechTesting" parent="CenterContainer/GridContainer" instance=ExtResource("1_5uhmd")]
-layout_mode = 2
-text = "Speech testing"
-scene = ExtResource("4_7uyh7")

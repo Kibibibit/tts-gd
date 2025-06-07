@@ -1,14 +1,12 @@
 #include "register_types.h"
 #include "wave_generator.h"
-#include "biquad_filter.h"
-#include "envelope.h"
-#include "formant_set.h"
-#include "phoneme.h"
-#include "speech_synth.h"
-#include "formant_filter.h"
+
 #include "lpc_file.h"
 #include "lpc_resource_format_loader.h"
 #include "lpc_resource_format_saver.h"
+#include "phone.h"
+#include "voice_resource.h"
+#include "lpc_synthesizer.h"
 
 #include <godot_cpp/core/class_db.hpp>
 
@@ -26,15 +24,12 @@ void initialize_tts_gd(ModuleInitializationLevel p_level) {
     }
 
     ClassDB::register_class<WaveGenerator>();
-    ClassDB::register_class<Envelope>();
-    ClassDB::register_class<FormantSet>();
-    ClassDB::register_class<BiquadFilter>();
-    ClassDB::register_class<Phoneme>();
-    ClassDB::register_class<SpeechSynth>();
-    ClassDB::register_class<FormantFilter>();
     ClassDB::register_class<LPCFile>();
     ClassDB::register_class<LPCResourceFormatLoader>();
     ClassDB::register_class<LPCResourceFormatSaver>();
+    ClassDB::register_class<LPCSynthesizer>();
+    ClassDB::register_class<Phone>();
+    ClassDB::register_class<VoiceResource>();
 
     lpc_loader.instantiate();
     lpc_saver.instantiate();

@@ -73,7 +73,6 @@ class LPCFile : public Resource {
 		int get_max_n_coefficients() const;
 
 
-
 	};
 }
 
