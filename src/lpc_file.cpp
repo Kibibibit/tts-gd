@@ -121,7 +121,7 @@ LPCFile::LPCFile() {
 	frame_count = 0;
 	dx = 0.0f;
 	x1 = 0.0f;
-	samplingPeriod = 1.0f / 44100.0f; // Default sample rate of 44100 Hz
+	sampling_period = 1.0f / 44100.0f; // Default sample rate of 44100 Hz
 	frames = nullptr;
 }
 
@@ -142,6 +142,9 @@ void LPCFile::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_max_n_coefficients"), &LPCFile::get_max_n_coefficients);
 	ClassDB::bind_method(D_METHOD("load_from_text", "file"), &LPCFile::load_from_text);
 	ClassDB::bind_method(D_METHOD("load_from_binary", "file"), &LPCFile::load_from_binary);
+	ClassDB::bind_method(D_METHOD("save_to_text", "file"), &LPCFile::save_to_text);
+	ClassDB::bind_method(D_METHOD("save_to_binary", "file"), &LPCFile::save_to_binary);
+	ClassDB::bind_method(D_METHOD("get_sample_rate"), &LPCFile::get_sample_rate);
 }
 
 void LPCFile::set_frame_count(int count) {
@@ -179,13 +182,20 @@ double LPCFile::get_x1() const {
 	return x1;
 }
 double LPCFile::get_sampling_period() const {
-	return samplingPeriod;
+	return sampling_period;
 }
 int LPCFile::get_max_n_coefficients() const {
 	return max_n_coefficients;
 }
 LPCFile::LPCFrame *LPCFile::get_frames() const {
 	return frames;
+}
+double LPCFile::get_sample_rate() const {
+	// Returns the sample rate based on the sampling period
+	if (sampling_period <= 0.0) {
+		return 0.0; // Avoid division by zero
+	}
+	return 1.0 / sampling_period;
 }
 
 Error LPCFile::load_from_text(Ref<FileAccess> file) {
@@ -234,7 +244,7 @@ Error LPCFile::load_from_text(Ref<FileAccess> file) {
 	if (_get_double_from_file(file, "x1", x1) != OK) {
 		return ERR_FILE_UNRECOGNIZED;
 	}
-	if (_get_double_from_file(file, "samplingPeriod", samplingPeriod) != OK) {
+	if (_get_double_from_file(file, "samplingPeriod", sampling_period) != OK) {
 		return ERR_FILE_UNRECOGNIZED;
 	}
 	if (_get_int_from_file(file, "maxnCoefficients", max_n_coefficients) != OK) {
@@ -326,7 +336,7 @@ Error LPCFile::save_to_text(Ref<FileAccess> file) const {
 	file->store_string("nx = " + String::num_int64(frame_count) + " \n");
 	file->store_string("dx = " + String::num_real(dx) + " \n");
 	file->store_string("x1 = " + String::num_real(x1) + " \n");
-	file->store_string("samplingPeriod = " + String::num_real(samplingPeriod) + " \n");
+	file->store_string("samplingPeriod = " + String::num_real(sampling_period) + " \n");
 	file->store_string("maxnCoefficients = " + String::num_int64(max_n_coefficients) + " \n");
 
 	// Now for frames
@@ -367,7 +377,7 @@ Error LPCFile::load_from_binary(Ref<FileAccess> file) {
 	frame_count = file->get_64();
 	dx = file->get_double();
 	x1 = file->get_double();
-	samplingPeriod = file->get_double();
+	sampling_period = file->get_double();
 	max_n_coefficients = file->get_64();
 	set_frame_count(frame_count);
 	// Read the frames
@@ -400,7 +410,7 @@ Error LPCFile::save_to_binary(Ref<FileAccess> file) const {
 	file->store_64(frame_count);
 	file->store_double(dx);
 	file->store_double(x1);
-	file->store_double(samplingPeriod);
+	file->store_double(sampling_period);
 	file->store_64(max_n_coefficients);
 	// Write the frames
 	for (int i = 0; i < frame_count; i++) {

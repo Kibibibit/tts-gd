@@ -30,7 +30,7 @@ class LPCFile : public Resource {
 		// Starting point of the first frame, in seconds
 		double x1;
 		// 1 over the sample rate, in seconds
-		double samplingPeriod;
+		double sampling_period;
 		int max_n_coefficients = 16;
 
 		LPCFrame *frames = nullptr;
@@ -71,6 +71,8 @@ class LPCFile : public Resource {
 		double get_x1() const;
 		double get_sampling_period() const;
 		int get_max_n_coefficients() const;
+
+		double get_sample_rate() const;
 
 
 	};
