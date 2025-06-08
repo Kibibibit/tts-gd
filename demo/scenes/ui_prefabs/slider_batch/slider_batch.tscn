@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://sialjhwkkmr0"]
+
+[ext_resource type="Script" uid="uid://blmn3qgdw8fly" path="res://scenes/ui_prefabs/slider_batch/slider_batch.gd" id="1_68iy0"]
+
+[node name="SliderBatch" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_68iy0")
+
+[node name="SliderGrid" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="HSlider" type="HSlider" parent="SliderGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="SliderGrid"]
+layout_mode = 2
+text = "Test Label"
+
+[node name="HSlider2" type="HSlider" parent="SliderGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="SliderGrid"]
+layout_mode = 2
+text = "Test Label"
+
+[node name="DefaultsButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Defaults"

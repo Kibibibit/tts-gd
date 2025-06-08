@@ -2,6 +2,7 @@
 #define TTS_GD_LPC_SYNTHESIZER_H
 
 #include "lpc_file.h"
+#include "voice_resource.h"
 #include "wave_generator.h"
 #include <godot_cpp/classes/ref_counted.hpp>
 #include <godot_cpp/variant/typed_array.hpp>
@@ -14,7 +15,7 @@ class LPCSynthesizer : public RefCounted {
 
 	private:
 		PackedFloat32Array history;
-		Ref<LPCFile> lpc_file;
+		Ref<VoiceResource> voice;
 		double wave_phase = 0.0;
 		int max_order = 16; // Default LPC order
 		double prev_gain = 0.0;
@@ -31,6 +32,7 @@ class LPCSynthesizer : public RefCounted {
 		double breath = 2.0;
 		double progress = 0.0;
 		bool interpolate_coefficients = true;
+		double shape_gain_factor = 0.5; // Factor to adjust the influence of wave shape on gain
 
 	
 	protected:
@@ -47,13 +49,16 @@ class LPCSynthesizer : public RefCounted {
 		double get_progress() const;
 		void set_progress(double p_progress);
 
-		double next_sample();
-		PackedFloat32Array next_n_samples(int n);
+		double next_playback_sample();
+		PackedFloat32Array next_n_playback_samples(int n);
+
+		double get_next_sample_at(int frame_index);
+		double get_next_sample_at_interpolated(int start_frame_index, int end_frame_index, double interpolation_factor);
 
 
 		// Getters and Setters
-		void set_lpc_file(const Ref<LPCFile> &file);
-		Ref<LPCFile> get_lpc_file() const;
+		void set_voice(const Ref<VoiceResource> &file);
+		Ref<VoiceResource> get_voice() const;
 
 		void set_max_order(int order);
 		int get_max_order() const;
@@ -85,6 +90,8 @@ class LPCSynthesizer : public RefCounted {
 		void set_breath(double breath);
 		void set_interpolate_coefficients(bool interpolate);
 		bool get_interpolate_coefficients() const;
+		double get_shape_gain_factor() const;
+		void set_shape_gain_factor(double factor);
 
 
 	};

@@ -1,9 +1,128 @@
-[gd_scene load_steps=6 format=3 uid="uid://diuk4qhxola5m"]
+[gd_scene load_steps=17 format=3 uid="uid://diuk4qhxola5m"]
 
 [ext_resource type="Script" uid="uid://3vgxoe2px7m5" path="res://scenes/screens/lpc_player_screen/lpc_player_screen.gd" id="1_b3bge"]
-[ext_resource type="LPCFile" uid="uid://cw4gsenvwhkx8" path="res://resources/dan.LPC" id="2_lgptk"]
+[ext_resource type="VoiceResource" uid="uid://dulggyu1ur0u7" path="res://resources/voice_resources/dan.tres" id="2_q4cee"]
 [ext_resource type="PackedScene" uid="uid://dqwoaq24wd1nl" path="res://scenes/ui_prefabs/back_button/back_button.tscn" id="3_sdjku"]
 [ext_resource type="PackedScene" uid="uid://bkec43uvowmr7" path="res://scenes/ui_prefabs/audio_control_buttons/audio_control_buttons.tscn" id="4_lgptk"]
+[ext_resource type="PackedScene" uid="uid://sialjhwkkmr0" path="res://scenes/ui_prefabs/slider_batch/slider_batch.tscn" id="5_b8me4"]
+[ext_resource type="Script" uid="uid://cgtw5411i5l0a" path="res://scenes/ui_prefabs/slider_batch/slider_batch_params.gd" id="6_q4cee"]
+
+[sub_resource type="Resource" id="Resource_q0pmg"]
+script = ExtResource("6_q4cee")
+property_name = &"base_frequency"
+label_string_prefix = "F0: "
+minimum = 1.0
+maximum = 600.0
+step = 1.0
+default_value = 120.0
+is_exponential = false
+display_digits = 3
+property_type = 1
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_q4cee"]
+script = ExtResource("6_q4cee")
+property_name = &"wave_shape"
+label_string_prefix = "Shape: "
+minimum = 0.0
+maximum = 1.0
+step = 0.001
+default_value = 0.0
+is_exponential = false
+display_digits = 3
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_831dn"]
+script = ExtResource("6_q4cee")
+property_name = &"breath"
+label_string_prefix = "Breath:"
+minimum = 0.0
+maximum = 1.0
+step = 0.01
+default_value = 0.5
+is_exponential = false
+display_digits = 2
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_omrov"]
+script = ExtResource("6_q4cee")
+property_name = &"shape_gain_factor"
+label_string_prefix = "Shape Gain:"
+minimum = 0.0
+maximum = 1.0
+step = 0.01
+default_value = 0.0
+is_exponential = false
+display_digits = 2
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_vcrxr"]
+script = ExtResource("6_q4cee")
+property_name = &"consonant_upper_threshold"
+label_string_prefix = "CMax:"
+minimum = 0.0
+maximum = 1.0
+step = 0.01
+default_value = 0.2
+is_exponential = false
+display_digits = 2
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_sja3p"]
+script = ExtResource("6_q4cee")
+property_name = &"consonant_lower_threshold"
+label_string_prefix = "CMin:"
+minimum = 0.0
+maximum = 1.0
+step = 0.01
+default_value = 0.05
+is_exponential = false
+display_digits = 2
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_1vpax"]
+script = ExtResource("6_q4cee")
+property_name = &"consonant_pre_emphasis_factor"
+label_string_prefix = "PreEmph:"
+minimum = 0.0
+maximum = 1.0
+step = 0.01
+default_value = 0.95
+is_exponential = false
+display_digits = 2
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_vrx2o"]
+script = ExtResource("6_q4cee")
+property_name = &"voiced_gain_factor"
+label_string_prefix = "VoicedGain:"
+minimum = 0.0
+maximum = 20.0
+step = 0.01
+default_value = 10.0
+is_exponential = false
+display_digits = 2
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
+
+[sub_resource type="Resource" id="Resource_oy8h8"]
+script = ExtResource("6_q4cee")
+property_name = &"voiced_coeff_stability_factor"
+label_string_prefix = "Stability:"
+minimum = 0.0
+maximum = 1.0
+step = 0.01
+default_value = 0.5
+is_exponential = false
+display_digits = 2
+property_type = 0
+metadata/_custom_type_script = "uid://cgtw5411i5l0a"
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_vji6u"]
 mix_rate = 8000.0
@@ -16,7 +135,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b3bge")
-lpc = ExtResource("2_lgptk")
+voice = ExtResource("2_q4cee")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -36,6 +155,11 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="SliderBatch" parent="VBoxContainer" instance=ExtResource("5_b8me4")]
+unique_name_in_owner = true
+layout_mode = 2
+parameters = Array[ExtResource("6_q4cee")]([SubResource("Resource_q0pmg"), SubResource("Resource_q4cee"), SubResource("Resource_831dn"), SubResource("Resource_omrov"), SubResource("Resource_vcrxr"), SubResource("Resource_sja3p"), SubResource("Resource_1vpax"), SubResource("Resource_vrx2o"), SubResource("Resource_oy8h8")])
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamGenerator_vji6u")
