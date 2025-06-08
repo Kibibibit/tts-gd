@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://diuk4qhxola5m"]
+[gd_scene load_steps=6 format=3 uid="uid://diuk4qhxola5m"]
 
 [ext_resource type="Script" uid="uid://3vgxoe2px7m5" path="res://scenes/screens/lpc_player_screen/lpc_player_screen.gd" id="1_b3bge"]
-[ext_resource type="LPCFile" uid="uid://dlct6libhg5ki" path="res://resources/dan-creek.LPC" id="2_vji6u"]
+[ext_resource type="LPCFile" uid="uid://cw4gsenvwhkx8" path="res://resources/dan.LPC" id="2_lgptk"]
+[ext_resource type="PackedScene" uid="uid://dqwoaq24wd1nl" path="res://scenes/ui_prefabs/back_button/back_button.tscn" id="3_sdjku"]
+[ext_resource type="PackedScene" uid="uid://bkec43uvowmr7" path="res://scenes/ui_prefabs/audio_control_buttons/audio_control_buttons.tscn" id="4_lgptk"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_vji6u"]
 mix_rate = 8000.0
@@ -14,7 +16,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b3bge")
-lpc = ExtResource("2_vji6u")
+lpc = ExtResource("2_lgptk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_sdjku")]
+layout_mode = 2
+
+[node name="AudioControlButtons" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_lgptk")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamGenerator_vji6u")

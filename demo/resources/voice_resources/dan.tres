@@ -1,6 +1,6 @@
 [gd_resource type="VoiceResource" load_steps=2 format=3 uid="uid://dulggyu1ur0u7"]
 
-[ext_resource type="LPCFile" uid="uid://cgw7reev64kd6" path="res://resources/dan_11025_11025.LPCB" id="1_eiecl"]
+[ext_resource type="LPCFile" uid="uid://cw4gsenvwhkx8" path="res://resources/dan.LPC" id="1_eiecl"]
 
 [resource]
 voice_name = "Dan"
