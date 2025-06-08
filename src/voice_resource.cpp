@@ -4,7 +4,8 @@
 
 using namespace godot;
 
-void VoiceResource::_bind_methods() {
+void VoiceResource::_bind_methods()
+{
 	ClassDB::bind_method(D_METHOD("set_voice_name", "name"), &VoiceResource::set_voice_name);
 	ClassDB::bind_method(D_METHOD("get_voice_name"), &VoiceResource::get_voice_name);
 
@@ -21,39 +22,48 @@ void VoiceResource::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::STRING, "voice_language"), "set_voice_language", "get_voice_language");
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "lpc_file", PROPERTY_HINT_RESOURCE_TYPE, "LPCFile"), "set_lpc_file", "get_lpc_file");
 	ADD_PROPERTY(PropertyInfo(Variant::DICTIONARY, "phone_map"), "set_phones_map", "get_phones_map");
-
 }
-VoiceResource::VoiceResource() {
+VoiceResource::VoiceResource()
+{
 	voice_name = "";
 	voice_language = "";
 	lpc_file = Ref<LPCFile>();
 	phone_map = TypedDictionary<String, Phone>();
 }
-VoiceResource::~VoiceResource() {
+VoiceResource::~VoiceResource()
+{
 	// Destructor logic if needed
 }
 
-void VoiceResource::set_voice_name(const String &name) {
+void VoiceResource::set_voice_name(const String &name)
+{
 	voice_name = name;
 }
-String VoiceResource::get_voice_name() const {
+String VoiceResource::get_voice_name() const
+{
 	return voice_name;
 }
-void VoiceResource::set_voice_language(const String &language) {
+void VoiceResource::set_voice_language(const String &language)
+{
 	voice_language = language;
 }
-String VoiceResource::get_voice_language() const {
+String VoiceResource::get_voice_language() const
+{
 	return voice_language;
 }
-void VoiceResource::set_lpc_file(const Ref<LPCFile> &file) {
+void VoiceResource::set_lpc_file(const Ref<LPCFile> &file)
+{
 	lpc_file = file;
 }
-Ref<LPCFile> VoiceResource::get_lpc_file() const {
+Ref<LPCFile> VoiceResource::get_lpc_file() const
+{
 	return lpc_file;
 }
-void VoiceResource::set_phones_map(const TypedDictionary<String, Phone> &phones) {
+void VoiceResource::set_phones_map(const TypedDictionary<String, Phone> &phones)
+{
 	phone_map = phones;
 }
-TypedDictionary<String, Phone> VoiceResource::get_phones_map() const {
+TypedDictionary<String, Phone> VoiceResource::get_phones_map() const
+{
 	return phone_map;
 }

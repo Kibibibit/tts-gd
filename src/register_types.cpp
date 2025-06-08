@@ -18,8 +18,10 @@ using namespace godot;
 static Ref<LPCResourceFormatLoader> lpc_loader;
 static Ref<LPCResourceFormatSaver> lpc_saver;
 
-void initialize_tts_gd(ModuleInitializationLevel p_level) {
-    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
+void initialize_tts_gd(ModuleInitializationLevel p_level)
+{
+    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE)
+    {
         return;
     }
 
@@ -35,12 +37,11 @@ void initialize_tts_gd(ModuleInitializationLevel p_level) {
     lpc_saver.instantiate();
     ResourceLoader::get_singleton()->add_resource_format_loader(lpc_loader);
     ResourceSaver::get_singleton()->add_resource_format_saver(lpc_saver);
-
-
-
 }
-void uninitialize_tts_gd(ModuleInitializationLevel p_level) {
-    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
+void uninitialize_tts_gd(ModuleInitializationLevel p_level)
+{
+    if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE)
+    {
         return;
     }
     ResourceLoader::get_singleton()->remove_resource_format_loader(lpc_loader);
@@ -48,14 +49,16 @@ void uninitialize_tts_gd(ModuleInitializationLevel p_level) {
     lpc_loader.unref();
     lpc_saver.unref();
 }
-extern "C" {
-    GDExtensionBool GDE_EXPORT tts_gd_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization) {
+extern "C"
+{
+    GDExtensionBool GDE_EXPORT tts_gd_init(GDExtensionInterfaceGetProcAddress p_get_proc_address, const GDExtensionClassLibraryPtr p_library, GDExtensionInitialization *r_initialization)
+    {
         godot::GDExtensionBinding::InitObject init_obj(p_get_proc_address, p_library, r_initialization);
 
         init_obj.register_initializer(initialize_tts_gd);
         init_obj.register_terminator(uninitialize_tts_gd);
         init_obj.set_minimum_library_initialization_level(MODULE_INITIALIZATION_LEVEL_SCENE);
 
-	return init_obj.init();
+        return init_obj.init();
     }
 }

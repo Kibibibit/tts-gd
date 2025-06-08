@@ -1,9 +1,9 @@
 #include "phone.h"
 
-
 using namespace godot;
 
-Phone::Phone() {
+Phone::Phone()
+{
 	name = "";
 	phoneme_ipa = "";
 	phoneme_variant = "";
@@ -18,82 +18,108 @@ Phone::Phone() {
 	stressed_pitch_factor = 1.0;
 }
 
-Phone::~Phone() {
+Phone::~Phone()
+{
 	// Destructor logic if needed
 }
-void Phone::set_name(const String &p_name) {
+void Phone::set_name(const String &p_name)
+{
 	name = p_name;
 }
-String Phone::get_name() const {
+String Phone::get_name() const
+{
 	return name;
 }
-void Phone::set_phoneme_ipa(const String &p_ipa) {
+void Phone::set_phoneme_ipa(const String &p_ipa)
+{
 	phoneme_ipa = p_ipa;
 }
-String Phone::get_phoneme_ipa() const {
+String Phone::get_phoneme_ipa() const
+{
 	return phoneme_ipa;
 }
-void Phone::set_phoneme_variant(const String &p_variant) {
+void Phone::set_phoneme_variant(const String &p_variant)
+{
 	phoneme_variant = p_variant;
 }
-String Phone::get_phoneme_variant() const {
+String Phone::get_phoneme_variant() const
+{
 	return phoneme_variant;
 }
-void Phone::set_is_diphthong(bool p_is_diphthong) {
+void Phone::set_is_diphthong(bool p_is_diphthong)
+{
 	is_diphthong = p_is_diphthong;
 }
-bool Phone::get_is_diphthong() const {
+bool Phone::get_is_diphthong() const
+{
 	return is_diphthong;
 }
-void Phone::set_start_lpc_indices(const TypedArray<int> &p_indices) {
+void Phone::set_start_lpc_indices(const TypedArray<int> &p_indices)
+{
 	start_lpc_indices = p_indices;
 }
-TypedArray<int> Phone::get_start_lpc_indices() const {
+TypedArray<int> Phone::get_start_lpc_indices() const
+{
 	return start_lpc_indices;
 }
-void Phone::set_end_lpc_indices(const TypedArray<int> &p_indices) {
+void Phone::set_end_lpc_indices(const TypedArray<int> &p_indices)
+{
 	end_lpc_indices = p_indices;
 }
-TypedArray<int> Phone::get_end_lpc_indices() const {
+TypedArray<int> Phone::get_end_lpc_indices() const
+{
 	return end_lpc_indices;
 }
-void Phone::set_transition_curve(const TypedArray<double> &p_curve) {
+void Phone::set_transition_curve(const TypedArray<double> &p_curve)
+{
 	transition_curve = p_curve;
 }
-TypedArray<double> Phone::get_transition_curve() const {
+TypedArray<double> Phone::get_transition_curve() const
+{
 	return transition_curve;
 }
-void Phone::set_attack_time(double p_time) {
+void Phone::set_attack_time(double p_time)
+{
 	attack_time = p_time;
 }
-double Phone::get_attack_time() const {
+double Phone::get_attack_time() const
+{
 	return attack_time;
 }
-void Phone::set_release_time(double p_time) {
+void Phone::set_release_time(double p_time)
+{
 	release_time = p_time;
 }
-double Phone::get_release_time() const {
+double Phone::get_release_time() const
+{
 	return release_time;
 }
-void Phone::set_stressed_duration_factor(double p_factor) {
+void Phone::set_stressed_duration_factor(double p_factor)
+{
 	stressed_duration_factor = p_factor;
 }
-double Phone::get_stressed_duration_factor() const {
+double Phone::get_stressed_duration_factor() const
+{
 	return stressed_duration_factor;
 }
-void Phone::set_stressed_amplitude_factor(float p_factor) {
+void Phone::set_stressed_amplitude_factor(float p_factor)
+{
 	stressed_amplitude_factor = p_factor;
 }
-double Phone::get_stressed_amplitude_factor() const {
+double Phone::get_stressed_amplitude_factor() const
+{
 	return stressed_amplitude_factor;
 }
-void Phone::set_stressed_pitch_factor(double p_factor) {
+void Phone::set_stressed_pitch_factor(double p_factor)
+{
 	stressed_pitch_factor = p_factor;
 }
-double Phone::get_stressed_pitch_factor() const {
+double Phone::get_stressed_pitch_factor() const
+{
 	return stressed_pitch_factor;
 }
-void Phone::_bind_methods() {
+void Phone::_bind_methods()
+{
 	ClassDB::bind_method(D_METHOD("set_name", "name"), &Phone::set_name);
 	ClassDB::bind_method(D_METHOD("get_name"), &Phone::get_name);
 
@@ -142,6 +168,4 @@ void Phone::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "stressed_duration_factor"), "set_stressed_duration_factor", "get_stressed_duration_factor");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "stressed_amplitude_factor"), "set_stressed_amplitude_factor", "get_stressed_amplitude_factor");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "stressed_pitch_factor"), "set_stressed_pitch_factor", "get_stressed_pitch_factor");
-	
 }
-
