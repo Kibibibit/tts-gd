@@ -31,6 +31,7 @@ class LPCSynthesizer : public RefCounted {
 		double voiced_coeff_stability_factor = 0.5;
 		double breath = 2.0;
 		double progress = 0.0;
+		int current_frame_index = 0;
 		bool interpolate_coefficients = true;
 		double shape_gain_factor = 0.5; // Factor to adjust the influence of wave shape on gain
 
@@ -93,7 +94,7 @@ class LPCSynthesizer : public RefCounted {
 		double get_shape_gain_factor() const;
 		void set_shape_gain_factor(double factor);
 
-
+		int get_current_frame_index() const;
 	};
 }
 

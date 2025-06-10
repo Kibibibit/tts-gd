@@ -161,5 +161,42 @@ unique_name_in_owner = true
 layout_mode = 2
 parameters = Array[ExtResource("6_q4cee")]([SubResource("Resource_q0pmg"), SubResource("Resource_q4cee"), SubResource("Resource_831dn"), SubResource("Resource_omrov"), SubResource("Resource_vcrxr"), SubResource("Resource_sja3p"), SubResource("Resource_1vpax"), SubResource("Resource_vrx2o"), SubResource("Resource_oy8h8")])
 
+[node name="FrameSlider" type="HSlider" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayFrameButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play Single Frame"
+
+[node name="FrameNumberLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Frame No: $$"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Frame"
+
+[node name="PlaySequenceButton" type="Button" parent="VBoxContainer/HBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play Sequence"
+
+[node name="FramesContainer" type="GridContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 8
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamGenerator_vji6u")

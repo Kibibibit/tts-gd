@@ -22,6 +22,7 @@ void LPCSynthesizer::reset()
 	prev_gain = 0.0;
 	prev_excitation = 0.0;
 	progress = 0.0;
+	current_frame_index = 0;
 }
 
 void LPCSynthesizer::reset_history()
@@ -320,7 +321,7 @@ double LPCSynthesizer::get_next_sample_at_interpolated(
 	double center_dist = std::abs(wave_shape - 0.5) * 2.0;			 // 0 at center, 1 at edges
 	double dB_boost = shape_gain_factor * 6.0 * (1.0 - center_dist); // Max 6dB boost at center
 	double shape_gain_modifier = std::pow(10.0, dB_boost / 20.0);	 // Convert dB to amplitude
-
+	current_frame_index = start_frame_index;
 	return output * std::sqrt(gain * shape_gain_modifier);
 }
 
@@ -376,6 +377,11 @@ PackedFloat32Array LPCSynthesizer::next_n_playback_samples(int n)
 	return samples;
 }
 
+int LPCSynthesizer::get_current_frame_index() const
+{
+	return current_frame_index;
+}
+
 void LPCSynthesizer::_bind_methods()
 {
 	ClassDB::bind_method(D_METHOD("reset"), &LPCSynthesizer::reset);
@@ -414,6 +420,7 @@ void LPCSynthesizer::_bind_methods()
 	ClassDB::bind_method(D_METHOD("get_interpolate_coefficients"), &LPCSynthesizer::get_interpolate_coefficients);
 	ClassDB::bind_method(D_METHOD("set_shape_gain_factor", "factor"), &LPCSynthesizer::set_shape_gain_factor);
 	ClassDB::bind_method(D_METHOD("get_shape_gain_factor"), &LPCSynthesizer::get_shape_gain_factor);
+	ClassDB::bind_method(D_METHOD("get_current_frame_index"), &LPCSynthesizer::get_current_frame_index);
 	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "voice", PROPERTY_HINT_RESOURCE_TYPE, "VoiceResource"), "set_voice", "get_voice");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "max_order", PROPERTY_HINT_RANGE, "1,1000,1"), "set_max_order", "get_max_order");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "base_frequency", PROPERTY_HINT_RANGE, "0.0,10000.0,0.01"), "set_base_frequency", "get_base_frequency");
