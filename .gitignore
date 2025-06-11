@@ -8,3 +8,7 @@ extension_api.json
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Python and neural network data
+__pycache__/
+*.pt
