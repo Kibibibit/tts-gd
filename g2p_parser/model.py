@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import unicodedata
 import regex as re
+import os
 
 GRAPHEMES = [
 	"<pad>", "<unk>", "/s>"
@@ -49,8 +50,8 @@ class G2PModel(nn.Module):
 		self.encoder_gru = nn.GRU(embedding_dim, hidden_size, batch_first=True)
 		self.decoder_gru = nn.GRU(embedding_dim+hidden_size, hidden_size, batch_first=True)
 
-		# self.attn = nn.Linear(hidden_size+hidden_size, hidden_size)
-		# self.attn_combine = nn.Linear(hidden_size+embedding_dim, embedding_dim)
+		self.attn = nn.Linear(hidden_size+hidden_size, hidden_size)
+		self.attn_combine = nn.Linear(hidden_size+embedding_dim, embedding_dim+hidden_size)
 
 		self.fully_connected = nn.Linear(embedding_dim, len(PHONEMES))
 
@@ -59,10 +60,13 @@ class G2PModel(nn.Module):
 		self.load_checkpoint(checkpoint)
 
 	def load_checkpoint(self, checkpoint_path):
-		if checkpoint_path is not None:
-			checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=True)
-			self.load_state_dict(checkpoint['model_state_dict'])
-			print(f"Loaded model from {checkpoint_path}")
+		if checkpoint_path is not None and checkpoint_path != "":
+			# check if the file exists
+			if os.path.isfile(checkpoint_path):
+				print(f"Loading model from {checkpoint_path}...")
+				checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=True)
+				self.load_state_dict(checkpoint)
+				print(f"Loaded model from {checkpoint_path}")
 		else:
 			print("No checkpoint provided, using random initialization.")
 			
@@ -79,15 +83,22 @@ class G2PModel(nn.Module):
 	def decode_step(self, decoder_input, decoder_hidden, encoder_outputs):
 		embedded = self.dropout(self.decoder_embedding(decoder_input))
 
-		attn_weights = torch.bmm(decoder_hidden.transpose(0, 1), encoder_outputs.transpose(1,2))
 
-		attn_weights = F.softmax(attn_weights, dim=2)
+		seq_length = encoder_outputs.size(1)
+		hidden_expanded = decoder_hidden.transpose(0,1)
+		hidden_repeated = hidden_expanded.repeat(1, seq_length, 1)
+
+		attn_input = torch.cat((hidden_repeated, encoder_outputs), dim=2)
+		attn_energies = self.attn(attn_input).tanh()
+		attn_weights = F.softmax(attn_energies.sum(dim=2), dim=1).unsqueeze(1)
+
 
 		context = torch.bmm(attn_weights, encoder_outputs)
 
-		rnn_input = torch.cat((embedded, context), dim=2)
+		combine_input = torch.cat((embedded, context), dim=2)
+		combined = self.attn_combine(combine_input)
 
-		output, decoder_hidden = self.decoder_gru(rnn_input, decoder_hidden)
+		output, decoder_hidden = self.decoder_gru(combined, decoder_hidden)
 
 		output = self.fully_connected(output.squeeze(1))
 
@@ -107,7 +118,7 @@ class G2PModel(nn.Module):
 		decoder_hidden = hidden
 
 		decoder_input = torch.tensor(
-			[self.phoneme_to_i["<s>"]],
+			[[self.phoneme_to_i["<s>"]]],
 			device=x.device
 		)
 
@@ -165,7 +176,7 @@ class G2PModel(nn.Module):
 	def normalize_text(self, text):
 
 		text = ''.join(
-			char for char in unicodedata.normalize('NDF', text)
+			char for char in unicodedata.normalize('NFD', text)
 			if unicodedata.category(char) != 'Mn'
 		).lower()
 
@@ -181,5 +192,5 @@ class G2PModel(nn.Module):
 		for word in words:
 			if word:
 				pred = self.predict(word)
-				output += " ".join(pred) + " "
+				output += " ".join(pred) + "\n"
 		return output.strip()
