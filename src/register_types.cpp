@@ -4,7 +4,12 @@
 #include "lpc_file.h"
 #include "lpc_resource_format_loader.h"
 #include "lpc_resource_format_saver.h"
+#include "lexicon.h"
+#include "lexicon_resource_format_loader.h"
+#include "lexicon_resource_format_saver.h"
+#include "speech_synthesizer_node.h"
 #include "phone.h"
+#include "phoneme.h"
 #include "voice_resource.h"
 #include "lpc_synthesizer.h"
 
@@ -17,6 +22,8 @@ using namespace godot;
 
 static Ref<LPCResourceFormatLoader> lpc_loader;
 static Ref<LPCResourceFormatSaver> lpc_saver;
+static Ref<LexiconResourceFormatLoader> lexicon_loader;
+static Ref<LexiconResourceFormatSaver> lexicon_saver;
 
 void initialize_tts_gd(ModuleInitializationLevel p_level)
 {
@@ -31,12 +38,21 @@ void initialize_tts_gd(ModuleInitializationLevel p_level)
     ClassDB::register_class<LPCResourceFormatSaver>();
     ClassDB::register_class<LPCSynthesizer>();
     ClassDB::register_class<Phone>();
+    ClassDB::register_class<Phoneme>();
     ClassDB::register_class<VoiceResource>();
+    ClassDB::register_class<Lexicon>();
+    ClassDB::register_class<LexiconResourceFormatLoader>();
+    ClassDB::register_class<LexiconResourceFormatSaver>();
+    ClassDB::register_class<SpeechSynthesizerNode>();
 
     lpc_loader.instantiate();
     lpc_saver.instantiate();
+    lexicon_loader.instantiate();
+    lexicon_saver.instantiate();
     ResourceLoader::get_singleton()->add_resource_format_loader(lpc_loader);
     ResourceSaver::get_singleton()->add_resource_format_saver(lpc_saver);
+    ResourceLoader::get_singleton()->add_resource_format_loader(lexicon_loader);
+    ResourceSaver::get_singleton()->add_resource_format_saver(lexicon_saver);
 }
 void uninitialize_tts_gd(ModuleInitializationLevel p_level)
 {
@@ -46,8 +62,12 @@ void uninitialize_tts_gd(ModuleInitializationLevel p_level)
     }
     ResourceLoader::get_singleton()->remove_resource_format_loader(lpc_loader);
     ResourceSaver::get_singleton()->remove_resource_format_saver(lpc_saver);
+    ResourceLoader::get_singleton()->remove_resource_format_loader(lexicon_loader);
+    ResourceSaver::get_singleton()->remove_resource_format_saver(lexicon_saver);
     lpc_loader.unref();
     lpc_saver.unref();
+    lexicon_loader.unref();
+    lexicon_saver.unref();
 }
 extern "C"
 {

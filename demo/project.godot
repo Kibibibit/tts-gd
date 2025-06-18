@@ -22,3 +22,4 @@ buses/default_bus_layout="uid://jfyx768p6dy8"
 [autoload]
 
 SignalBus="*res://scripts/autoloads/signal_bus.gd"
+LexiconLoader="*res://scripts/autoloads/lexicon_loader.gd"
